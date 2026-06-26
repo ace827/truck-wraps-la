@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Truck Wraps LA — AI Receptionist Demo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script id="retell-widget"
+    src="https://dashboard.retellai.com/retell-widget-v2.js"
+    data-voice-public-key="public_key_d5af371075943c1523556"
+    data-voice-agent-id="agent_44cada6e77e23cc0aae52e2a10"
+    data-title="Truck Wraps LA"
+    data-color="#dc2626"
+    data-fab-text="Try AI Demo"
+    data-bot-name="Truck Wraps LA AI Receptionist"
+    data-greeting-message="Hey! Thanks for calling Truck Wraps LA. I can help you get a quote, book an appointment, or answer questions about our truck and fleet wraps. What can I help you with?"
+  ></script>
+  <style>
+    :root {
+      --dark: #111;
+      --accent: #dc2626;
+      --accent-light: #ef4444;
+      --white: #fff;
+      --muted: #6b7280;
+      --text: #1f2937;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Inter', sans-serif;
+      background: var(--dark);
+    }
+    .sprite { display: none; }
+    .page { height: 100vh; display: flex; flex-direction: column; }
+
+    header {
+      background: var(--dark);
+      padding: 14px 40px;
+      display: flex; align-items: center; gap: 14px;
+      border-bottom: 2px solid var(--accent);
+      flex-shrink: 0;
+    }
+    .logo-mark {
+      width: 40px; height: 40px;
+      background: var(--accent); border-radius: 9px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .logo-mark svg { width: 21px; height: 21px; fill: white; }
+    .brand-name { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: 1.15rem; color: var(--white); line-height: 1; }
+    .brand-sub { font-size: 0.65rem; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.07em; margin-top: 2px; }
+    .ai-badge {
+      margin-left: auto;
+      background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.4);
+      color: var(--accent-light); font-size: 0.62rem; font-weight: 700;
+      padding: 4px 12px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.08em;
+    }
+
+    main { flex: 1; background: var(--white); overflow: hidden; display: flex; flex-direction: column; }
+
+    .white-section {
+      flex: 1; padding: 32px 40px 24px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+      max-width: 960px; width: 100%; margin: 0 auto;
+    }
+
+    .left { display: flex; flex-direction: column; gap: 16px; }
+
+    h2 { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: 1.9rem; line-height: 1.15; color: var(--dark); }
+    h2 em { color: var(--accent); font-style: normal; }
+
+    .tagline { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+    .features { display: flex; flex-direction: column; gap: 9px; }
+    .feat { display: flex; align-items: flex-start; gap: 9px; font-size: 0.79rem; color: var(--text); line-height: 1.4; }
+    .feat-icon {
+      width: 17px; height: 17px; background: rgba(220,38,38,0.1);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .feat-icon svg { width: 9px; height: 9px; fill: var(--accent); }
+    .feat strong { color: var(--dark); }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip {
+      background: #f3f4f6; color: var(--muted);
+      font-size: 0.63rem; font-weight: 600;
+      padding: 5px 11px; border-radius: 20px;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .chip.red { background: rgba(220,38,38,0.08); color: var(--accent); }
+
+    .right { display: flex; flex-direction: column; gap: 8px; justify-content: center; }
+
+    .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .svc {
+      background: var(--dark); border-radius: 8px;
+      padding: 10px 12px; display: flex; align-items: center; gap: 9px;
+    }
+    .svc-icon {
+      width: 28px; height: 28px; background: rgba(220,38,38,0.15);
+      border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .svc-icon svg { width: 14px; height: 14px; fill: var(--accent); }
+    .svc-name { font-size: 0.7rem; font-weight: 600; color: var(--white); }
+
+    .dark-section {
+      background: var(--dark); padding: 18px 40px;
+      display: flex; align-items: center; gap: 28px;
+      max-width: 960px; width: 100%; margin: 0 auto; flex-shrink: 0;
+    }
+    .cta-block { flex: 1; }
+    .cta-label {
+      font-family: 'Raleway', sans-serif; font-weight: 900; font-size: 0.7rem;
+      color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px;
+    }
+    .cta-text { font-size: 0.74rem; color: #9ca3af; line-height: 1.5; }
+    .cta-text strong { color: #e5e7eb; }
+
+    .try-block { flex: 1; border-left: 3px solid var(--accent); padding-left: 14px; }
+    .try-label { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 4px; }
+    .try-text { font-size: 0.71rem; color: #6b7280; font-style: italic; line-height: 1.4; }
+
+    .arrow {
+      font-size: 2rem; color: var(--accent); flex-shrink: 0;
+      animation: br 1.3s ease-in-out infinite; line-height: 1;
+    }
+    @keyframes br {
+      0%,100% { transform: translate(0,0); opacity:1; }
+      50% { transform: translate(5px,5px); opacity:0.5; }
+    }
+
+    footer {
+      background: var(--dark); border-top: 1px solid #1f1f1f;
+      padding: 8px 40px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+    }
+    .footer-biz { font-size: 0.63rem; color: #374151; }
+    .footer-powered { font-size: 0.63rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; }
+
+    @media (max-width: 600px) {
+      html, body { overflow: auto; }
+      .page { height: auto; }
+      main { overflow: visible; }
+      .white-section { grid-template-columns: 1fr; padding: 24px 20px 20px; gap: 24px; }
+      .dark-section { flex-direction: column; align-items: flex-start; padding: 20px; gap: 16px; }
+      header, footer { padding: 12px 20px; }
+      h2 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+<svg class="sprite" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="ic-truck" viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></symbol>
+  <symbol id="ic-wrap" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></symbol>
+  <symbol id="ic-fleet" viewBox="0 0 24 24"><path d="M17 5H3c-1.1 0-2 .9-2 2v9h2c0 1.65 1.35 3 3 3s3-1.35 3-3h5.5c0 1.65 1.35 3 3 3s3-1.35 3-3H23v-5l-6-6zM3 11V7h14v4H3zm3 6.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm11.5 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm-1.5-6h-2V7.5l3.5 3.5h-1.5z"/></symbol>
+  <symbol id="ic-shield" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></symbol>
+  <symbol id="ic-sparkle" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></symbol>
+  <symbol id="ic-paint" viewBox="0 0 24 24"><path d="M7 14c-1.66 0-3 1.34-3 3 0 1.31-1.16 2-2 2 .92 1.22 2.49 2 4 2 2.21 0 4-1.79 4-4 0-1.66-1.34-3-3-3zm13.71-9.37l-1.34-1.34c-.39-.39-1.02-.39-1.41 0L9 12.25 11.75 15l8.96-8.96c.39-.39.39-1.02 0-1.41z"/></symbol>
+  <symbol id="ic-check" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></symbol>
+</svg>
+
+<div class="page">
+
+  <header>
+    <div class="logo-mark"><svg><use href="#ic-truck"/></svg></div>
+    <div>
+      <div class="brand-name">Truck Wraps LA</div>
+      <div class="brand-sub">Commercial Truck and Fleet Wraps</div>
+    </div>
+    <div class="ai-badge">AI Demo</div>
+  </header>
+
+  <main>
+    <div class="white-section">
+      <div class="left">
+        <h2>Your <em>AI Receptionist</em> Always Answers</h2>
+        <p class="tagline">Truck Wraps LA's AI handles calls around the clock, quoting truck and fleet wraps, booking consultations, and capturing leads while your team stays focused on the job.</p>
+        <div class="features">
+          <div class="feat"><div class="feat-icon"><svg><use href="#ic-check"/></svg></div><span><strong>Instant quotes</strong> — single trucks, full fleets, PPF and more</span></div>
+          <div class="feat"><div class="feat-icon"><svg><use href="#ic-check"/></svg></div><span><strong>Book consultations</strong> — schedules appointments by voice, anytime</span></div>
+          <div class="feat"><div class="feat-icon"><svg><use href="#ic-check"/></svg></div><span><strong>24/7 availability</strong> — nights, weekends, never a missed lead</span></div>
+          <div class="feat"><div class="feat-icon"><svg><use href="#ic-check"/></svg></div><span><strong>Lead capture</strong> — vehicle type, fleet size and service interest every call</span></div>
+        </div>
+        <div class="chips">
+          <span class="chip red">24/7 Available</span>
+          <span class="chip red">Appointment Booking</span>
+          <span class="chip">Lead Capture</span>
+          <span class="chip">Bilingual EN / ES</span>
+        </div>
+      </div>
+      <div class="right">
+        <div class="services-grid">
+          <div class="svc"><div class="svc-icon"><svg><use href="#ic-truck"/></svg></div><div class="svc-name">Full Truck Wraps</div></div>
+          <div class="svc"><div class="svc-icon"><svg><use href="#ic-fleet"/></svg></div><div class="svc-name">Fleet Wraps</div></div>
+          <div class="svc"><div class="svc-icon"><svg><use href="#ic-wrap"/></svg></div><div class="svc-name">Partial Wraps</div></div>
+          <div class="svc"><div class="svc-icon"><svg><use href="#ic-shield"/></svg></div><div class="svc-name">Paint Protection Film</div></div>
+          <div class="svc"><div class="svc-icon"><svg><use href="#ic-paint"/></svg></div><div class="svc-name">Vinyl Lettering</div></div>
+          <div class="svc"><div class="svc-icon"><svg><use href="#ic-sparkle"/></svg></div><div class="svc-name">Custom Graphics</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dark-section">
+      <div class="cta-block">
+        <div class="cta-label">Try the Demo</div>
+        <div class="cta-text">Click <strong>"Try AI Demo"</strong> in the <strong>bottom-right corner</strong> to speak with Truck Wraps LA's AI receptionist live.</div>
+      </div>
+      <div class="try-block">
+        <div class="try-label">What to try</div>
+        <div class="try-text">"Hey, I have a fleet of 8 box trucks I need wrapped with our company branding. Can you give me a ballpark and how long would it take?"</div>
+      </div>
+      <div class="arrow">↘</div>
+    </div>
+  </main>
+
+  <footer>
+    <span class="footer-biz">Truck Wraps LA — Commercial Truck and Fleet Wraps</span>
+    <span class="footer-powered">Powered by Orbit AI</span>
+  </footer>
+
+</div>
+
+<script>
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      var fab = document.querySelector('button[class*="fab"], button[class*="Fab"], .retell-fab, [class*="retell-btn"]');
+      if (fab) fab.click();
+    }, 1500);
+  });
+</script>
+</body>
+</html>
